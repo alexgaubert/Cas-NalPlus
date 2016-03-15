@@ -1,4 +1,7 @@
 <?php
+error_reporting(0); // Désactiver le rapport d'erreurs
+// error_reporting(E_ALL); // Reporter toutes les erreurs PHP
+
 echo"<!DOCTYPE html>
 <html lang='fr'>
 <head>
@@ -51,12 +54,35 @@ echo"<!DOCTYPE html>
     <header>
         <h1><a href='index.php'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
         <nav>  
-            <ul class='menu'>
-                <li class='current'><a href='index.php'>Home</a></li>
-                <li><a href='about.php'>About</a></li>
+            <ul class='menu'>";
+			
+setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
+
+$dateBBB = strftime("%A", mktime(0, 0, 0, date('m'), date('d')-3, date('y')));
+$dateBB = strftime("%A", mktime(0, 0, 0, date('m'), date('d')-2, date('y')));
+$dateB = strftime("%A", mktime(0, 0, 0, date('m'), date('d')-1, date('y')));
+$dateJ = strftime("%A", mktime(0, 0, 0, date('m'), date('d'), date('y')));
+$dateA = strftime("%A", mktime(0, 0, 0, date('m'), date('d')+1, date('y')));
+$dateAA = strftime("%A", mktime(0, 0, 0, date('m'), date('d')+2, date('y')));
+$dateAAA = strftime("%A", mktime(0, 0, 0, date('m'), date('d')+3, date('y')));
+
+// echo  $dateBBB . ", " . $dateBB . ", " . $dateB . ", <B>" . $dateJ . "</b>, " . $dateA . ", " . $dateAA . ", " . $dateAAA;
+			
+			
+			/*
+				<li><a href='about.php'>About</a></li>
                 <li><a href='services.php'>Services</a></li>
                 <li><a href='products.php'>Products</a></li>
                 <li><a href='contacts.php'>Contacts</a></li>
+			*/
+			echo "
+                <li "; if($_GET['day'] == $dateBBB){ echo "class='current'"; }; echo"><a href='?day=".$dateBBB."'> ".$dateBBB."</a></li>
+                <li "; if($_GET['day'] == $dateBB){ echo "class='current'"; }; echo"><a href='?day=".$dateBB."'> ".$dateBB."</a></li>
+                <li "; if($_GET['day'] == $dateB){ echo "class='current'"; }; echo"><a href='?day=".$dateB."'> ".$dateB."</a></li>
+                <li "; if($_GET['day'] == $dateJ || !isset($_GET['day'])){ echo "class='current'"; }; echo"><a href='?day=".$dateJ."'> ".$dateJ."</a></li>
+                <li "; if($_GET['day'] == $dateA){ echo "class='current'"; }; echo"><a href='?day=".$dateA."'> ".$dateA."</a></li>
+                <li "; if($_GET['day'] == $dateAA){ echo "class='current'"; }; echo"><a href='?day=".$dateAA."'> ".$dateAA."</a></li>
+                <li "; if($_GET['day'] == $dateAAA){ echo "class='current'"; }; echo"><a href='?day=".$dateAAA."'> ".$dateAAA."</a></li>
             </ul>
          </nav>
          <div id='slide'>		
