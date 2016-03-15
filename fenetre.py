@@ -4,9 +4,8 @@
 Module implementing MainWindow.
 """
 
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QMainWindow
-
 from Ui_fenetre import Ui_MainWindow
 
 
@@ -23,9 +22,3 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-    
-    @pyqtSlot()
-    def on_pushButton_2_clicked(self):
-        """
-        Slot documentation goes here.
-        """
