@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'W:\2015-2016\SLAM3\TP10\Cas-NalPlus\main.ui'
+# Form implementation generated from reading ui file 'W:\2015-2016\SLAM3\TP10\Cas-NalPlus\fenetre.ui'
 #
 # Created by: PyQt5 UI code generator 5.5.1
 #
@@ -14,6 +14,12 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
+        self.pushButton = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton.setGeometry(QtCore.QRect(160, 370, 75, 23))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(590, 290, 75, 23))
+        self.pushButton_2.setObjectName("pushButton_2")
         MainWindow.setCentralWidget(self.centralWidget)
 
         self.retranslateUi(MainWindow)
@@ -22,6 +28,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton_2.setText(_translate("MainWindow", "PushButton"))
 
 
 if __name__ == "__main__":
