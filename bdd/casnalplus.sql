@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 15 Mars 2016 à 17:15
+-- Généré le :  Mar 15 Mars 2016 à 17:50
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -33,6 +33,21 @@ CREATE TABLE IF NOT EXISTS `acteur` (
   `PRENOM` char(32) DEFAULT NULL,
   PRIMARY KEY (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déclencheurs `acteur`
+--
+DROP TRIGGER IF EXISTS `before_insert_acteur`;
+DELIMITER //
+CREATE TRIGGER `before_insert_acteur` BEFORE INSERT ON `acteur`
+ FOR EACH ROW BEGIN
+IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
+THEN
+INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
+END IF; 
+END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -118,6 +133,13 @@ CREATE TABLE IF NOT EXISTS `intervenant` (
   PRIMARY KEY (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `intervenant`
+--
+
+INSERT INTO `intervenant` (`CODE`, `NOM`, `PRENOM`) VALUES
+('1', 'PIERRE', 'INGENIEUR');
+
 -- --------------------------------------------------------
 
 --
@@ -131,6 +153,21 @@ CREATE TABLE IF NOT EXISTS `invite` (
   `PRENOM` char(32) DEFAULT NULL,
   PRIMARY KEY (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déclencheurs `invite`
+--
+DROP TRIGGER IF EXISTS `before_insert_invite`;
+DELIMITER //
+CREATE TRIGGER `before_insert_invite` BEFORE INSERT ON `invite`
+ FOR EACH ROW BEGIN
+IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
+THEN
+INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
+END IF; 
+END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -170,6 +207,21 @@ CREATE TABLE IF NOT EXISTS `presentateur` (
   PRIMARY KEY (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déclencheurs `presentateur`
+--
+DROP TRIGGER IF EXISTS `before_insert_presentateur`;
+DELIMITER //
+CREATE TRIGGER `before_insert_presentateur` BEFORE INSERT ON `presentateur`
+ FOR EACH ROW BEGIN
+	IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
+    THEN
+    	INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
+    END IF;
+END
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -206,6 +258,21 @@ CREATE TABLE IF NOT EXISTS `realisateur` (
   `PRENOM` char(32) DEFAULT NULL,
   PRIMARY KEY (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déclencheurs `realisateur`
+--
+DROP TRIGGER IF EXISTS `before_insert_realisateur`;
+DELIMITER //
+CREATE TRIGGER `before_insert_realisateur` BEFORE INSERT ON `realisateur`
+ FOR EACH ROW BEGIN
+IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
+THEN
+INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
+END IF; 
+END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
