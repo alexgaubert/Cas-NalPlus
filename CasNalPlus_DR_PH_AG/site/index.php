@@ -50,13 +50,9 @@ echo"<!DOCTYPE html>
 <body>
 <div class='bg'>
 <div class='bg-2'>
-  <!--==============================header=================================-->
-    <header>
-        <h1><a href='index.php'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
-        <nav>  
-            <ul class='menu'>";
-			
-setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
+  <!--==============================header=================================-->";
+  
+  setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
 $dateBBB = strftime("%A", mktime(0, 0, 0, date('m'), date('d')-3, date('y')));
 $dateBB = strftime("%A", mktime(0, 0, 0, date('m'), date('d')-2, date('y')));
@@ -66,8 +62,19 @@ $dateA = strftime("%A", mktime(0, 0, 0, date('m'), date('d')+1, date('y')));
 $dateAA = strftime("%A", mktime(0, 0, 0, date('m'), date('d')+2, date('y')));
 $dateAAA = strftime("%A", mktime(0, 0, 0, date('m'), date('d')+3, date('y')));
 
+
+$dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('y')));
+
 // echo  $dateBBB . ", " . $dateBB . ", " . $dateB . ", <B>" . $dateJ . "</b>, " . $dateA . ", " . $dateAA . ", " . $dateAAA;
 			
+    echo "<header>
+        <h1><a href='index.php'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
+        <nav>  
+			<ul class='menu2'>
+				<li><a href='?day=".$dateJ."'>".strtoupper($dateEntiere)."</a></li>
+			</ul>
+            <ul class='menu'>";
+		
 			
 			/*
 				<li><a href='about.php'>About</a></li>
@@ -84,6 +91,13 @@ $dateAAA = strftime("%A", mktime(0, 0, 0, date('m'), date('d')+3, date('y')));
                 <li "; if($_GET['day'] == $dateAA){ echo "class='current'"; }; echo"><a href='?day=".$dateAA."'> ".$dateAA."</a></li>
                 <li "; if($_GET['day'] == $dateAAA){ echo "class='current'"; }; echo"><a href='?day=".$dateAAA."'> ".$dateAAA."</a></li>
             </ul>
+			<ul class='menu3'>
+				<li><a href='?moment=nuit'>".strtoupper('Nuit')."</a></li>
+				<li><a href='?moment=matin'>".strtoupper('Matin')."</a></li>
+				<li><a href='?moment=apresmidi'>".strtoupper('Apres-Midi')."</a></li>
+				<li><a href='?moment=debutsoiree'>".strtoupper('Debut de soiree')."</a></li>
+				<li><a href='?moment=soiree'>".strtoupper('Soiree')."</a></li>
+			</ul>
          </nav>
          <div id='slide'>		
             <div class='slider'>
