@@ -83,17 +83,19 @@ h1 {display:block; z-index:100; background:url(../images/shadow-1.png) center bo
 nav { width:1023px; z-index:100; background:url(../images/shadow-2.png) center bottom no-repeat; margin:0px auto; padding:0px; border-bottom:#d0dde2 1px solid; border-top:#d0dde2 1px solid; text-align:center;}
 
 ul.menu {margin:10px 0px 10px 0px; display:inline-block;}
-ul.menu2 li {float:left; line-height:29px; margin:0px -30px 0px 63px; width:1305px; text-align:left; border-left:#d2dfe3 1px solid; }
-ul.menu3 li {float:left; line-height:29px; margin:0px 0px 0px 0px; width:200px; text-align:center; border-left:#d2dfe3 1px solid; }
-ul.menu li {float:left; line-height:20px; margin:0px 0px 0px 0px; width:135px; text-align:center; border-left:#d2dfe3 1px solid; }
+ul.menu2 {margin:10px 0px 10px 0px; display:inline-block;}
+ul.menu3 {margin:10px 0px 10px 0px; display:inline-block;}
+ul.menu2 li {float:left; line-height:29px; margin:0px 0px 0px 0px; width:300px; text-align:CENTER; border-left:#d2dfe3 1px solid; }
+ul.menu3 li {float:left; line-height:29px; margin:0px -20px 0px 0px; width:200px; text-align:center; border-left:#d2dfe3 1px solid; }
+ul.menu li {float:left; line-height:20px; margin:0px 0px 0px 0px; width:100px; text-align:center; border-left:#d2dfe3 1px solid; }
 ul.menu2 li:first-child {border:transparent 1px solid;} 
 ul.menu3 li:first-child {border:transparent 1px solid;} 
 ul.menu li:first-child {border:transparent 1px solid;} 
 ul.menu2 li a {font-size:20px; line-height:29px; color:#1560BD; font-family: 'Passion One', cursive; font-weight:400; display:inline-block; text-shadow: 3px 3px 1px #acbec6; letter-spacing:1px; }
-ul.menu3 li a {font-size:20px; line-height:29px; color:#fff; font-family: 'Passion One', cursive; font-weight:400; display:inline-block; text-shadow: 3px 3px 1px #acbec6; letter-spacing:1px; }
-ul.menu li a {font-size:20px; line-height:29px; color:#fff; font-family: 'Passion One', cursive; font-weight:400; display:inline-block; text-shadow: 3px 3px 1px #acbec6; letter-spacing:1px; }
+ul.menu3 li a {font-size:20px; line-height:29px; color:#000; font-family: 'Passion One', cursive; font-weight:400; display:inline-block; text-shadow: 3px 3px 1px #acbec6; letter-spacing:1px; }
+ul.menu li a {font-size:20px; line-height:29px; color:#FFF; font-family: 'Passion One', cursive; font-weight:400; display:inline-block; text-shadow: 3px 3px 1px #acbec6; letter-spacing:1px; }
 ul.menu2 li a:hover , ul.menu li.current a { color:#1560BD; text-shadow: 0px 0px 1px #c4d2d8; }
-ul.menu3 li a:hover , ul.menu li.current a { color:#b92103; text-shadow: 0px 0px 1px #c4d2d8; }
+ul.menu3 li a:hover , ul.menu3 li.current a { color:#FFF; text-shadow: 0px 0px 1px #c4d2d8; }
 ul.menu li a:hover , ul.menu li.current a { color:#b92103; text-shadow: 0px 0px 1px #c4d2d8; }
 
 /*********************************content*************************************/
