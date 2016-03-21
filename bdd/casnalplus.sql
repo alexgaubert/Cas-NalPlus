@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 21 Mars 2016 à 19:15
+-- Généré le :  Lun 21 Mars 2016 à 19:24
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -125,17 +125,10 @@ CREATE TABLE IF NOT EXISTS `chaine` (
 --
 
 INSERT INTO `chaine` (`ID`, `LIBELLE`) VALUES
-('1', 'Nal+ Premier'),
 ('10', 'Nal+'),
 ('11', 'Nal+ Decale'),
 ('12', 'Nal+ Family'),
 ('13', 'Nal+ Cinema'),
-('2', 'Nal+ Frisson'),
-('3', 'Nal+ Emotion'),
-('4', 'Nal+ Famiz'),
-('5', 'Nal+ Star'),
-('6', 'Nal+ Club'),
-('7', 'Nal+ Classic'),
 ('8', 'Nal+  Sport'),
 ('9', 'Nal+ Series');
 
