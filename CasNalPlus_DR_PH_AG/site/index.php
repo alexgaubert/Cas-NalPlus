@@ -139,42 +139,97 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
          </nav>
          <div id='slide'>			 
             <div class='slider'>";
-			/*
+			
+			echo "
                 <ul class='items'>
-                    <li><img src='images/slider-1.jpg' alt='' /><div class='banner'><div class='banner-1'></div><a href='#' class='button-1'>Read more</a></div></li>
-                    <li><img src='images/slider-2.jpg' alt='' /><div class='banner'><div class='banner-2'></div><a href='#' class='button-1'>Read more</a></div></li>
-                    <li><img src='images/slider-3.jpg' alt='' /><div class='banner'><div class='banner-3'></div><a href='#' class='button-1'>Read more</a></div></li>
-                </ul>
-				*/
+                    <li><img src='' alt='' /><div class='banner'><div class=''></div><a href='#' class=''></a></div></li>
+                    <li><img src='' alt='' /><div class='banner'><div class=''></div><a href='#' class=''></a></div></li>
+                    <li><img src='' alt='' /><div class='banner'><div class=''></div><a href='#' class=''></a></div></li>
+                </ul>";
+				
 				
 				echo "
-				<table style='width:100%'>";
+				<table border='1' style='width:100%'>";
 				
 				$nvlleConnexion = new Connexion();
 				$bdd = $nvlleConnexion->IDconnexion;
 				
-				$SQL = "SELECT c.libelle, da.DATEH, p.nom FROM programme as p INNER JOIN diffusion as di on p.CODE = di.CODE
-				INNER JOIN chaine as c on di.ID_1 = c.ID INNER JOIN date_heure as da on di.ID = da.ID";
+				$SQL = "SELECT UPPER(c.libelle), da.DATEH, p.nom, UPPER(t.LIBELLE), p.DUREE, p.INEDIT, p.HD
+				FROM programme as p INNER JOIN diffusion as di on p.CODE = di.CODE INNER JOIN chaine as c on di.ID_1 = c.ID INNER JOIN date_heure as da on di.ID = da.ID 
+				INNER JOIN type_programme as t on p.ID_CORRESPOND = t.ID";
 					
 				$resultat = $bdd->query($SQL);	
 				
 				
 				while ($resultat1=$resultat->fetch(PDO::FETCH_BOTH))
 				{		
-					$heure = substr($resultat1[1],8,4);
+					$heure = substr($resultat1[1],10,6);
+					
+					$duree1 = substr($resultat1[4],0,2);
+					$duree2 = substr($resultat1[4],3,2);
+					$duree = $duree1 . " H " . $duree2;
+					
+					$nal_avant = substr($resultat1[0], 0, 4); 
+					$nal_apres = substr($resultat1[0], 5, 20);
+					$nal = $nal_avant . "</br>" . $nal_apres;
+					
+					// Gestion Logo Nal+
+					if($nal_apres == "CINEMA")
+					{
+						$logo_nal = "<img width='30%' src='images\cinema.png'></img>";
+					}
+					else
+					{
+						$logo_nal = "<img width='30%' src=''></img>";
+					}
+					
+					// Gestion Rediffusion OU Avant première
+					if($resultat1[5] == 0)
+					{
+						$image_ap = "<img width='20%' src=''></img>";
+						$diffusion = "REDIFFUSION";
+					}
+					else
+					{
+						$image_ap = "<img width='20%' src='images\ap.png'></img>";
+						$diffusion = "1ERE";
+					}
+					
+					// Gestion HD ou pas
+					if($resultat1[6] == 1)
+					{
+						$image_hd = "<img width='20%' src='images\log_hd.png'></img>";
+					}
+					else
+					{
+						$image_hd = "<img src=''></img>";
+					}
+					
+					// Ce qu'on affiche dans la cellule
+					$cellule = $heure . "</br><b>".$resultat1[2] ."</b></br><font color='grey'>" . $resultat1[3] . "</br>".$duree." - ".$diffusion."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
 					
 					echo "
 					<tr>
-						<th>";
-							echo $resultat1[0] . "
-						</th>
-						<th>
-							". $heure . "
-						</th>
-						<th>
-							". $resultat1[2] . "
-						</th>
+						<td align=center valign=middle height=80 width=25%>";
+							echo "<b>" . $logo_nal . "<p class='flotte2'>" . $nal . "</p></b>
+						</td>
+						<td align=center valign=middle  bgcolor='gray' width=2%>";
+							echo "◁
+						</td>
+						<td valign=middle  width=20%>
+							<p class='flotte'>".$cellule . "</p><p>". $image_hd . "</br>" . $image_ap ."	</p>					
+						</td>
+						<td valign=middle  width=20%>
+							
+						</td>
+						<td valign=middle  width=20%>
+							
+						</td>
+						<td align=center valign=middle  bgcolor='gray' width=2%>";
+							echo "▷
+						</td>
 					</tr>";
+					/* <HR width=100%> */
 				}
 				
 				echo "

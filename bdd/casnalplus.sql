@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 21 Mars 2016 à 11:13
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Généré le :  Lun 21 Mars 2016 à 19:15
+-- Version du serveur :  5.7.9
+-- Version de PHP :  5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `casnalplus`
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `acteur`
 --
 
+DROP TABLE IF EXISTS `acteur`;
 CREATE TABLE IF NOT EXISTS `acteur` (
   `CODE` char(32) NOT NULL,
   `COTE` decimal(10,2) DEFAULT NULL,
@@ -54,15 +55,14 @@ INSERT INTO `acteur` (`CODE`, `COTE`, `NOM`, `PRENOM`) VALUES
 -- Déclencheurs `acteur`
 --
 DROP TRIGGER IF EXISTS `before_insert_acteur`;
-DELIMITER //
-CREATE TRIGGER `before_insert_acteur` BEFORE INSERT ON `acteur`
- FOR EACH ROW BEGIN
+DELIMITER $$
+CREATE TRIGGER `before_insert_acteur` BEFORE INSERT ON `acteur` FOR EACH ROW BEGIN
 IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
 THEN
 INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
 END IF; 
 END
-//
+$$
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -71,6 +71,7 @@ DELIMITER ;
 -- Structure de la table `avis`
 --
 
+DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `CODE` char(32) NOT NULL,
   `ID` char(32) NOT NULL,
@@ -86,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
 -- Structure de la table `avoir`
 --
 
+DROP TABLE IF EXISTS `avoir`;
 CREATE TABLE IF NOT EXISTS `avoir` (
   `CODE` char(32) NOT NULL,
   `CODE_1` char(32) NOT NULL,
@@ -111,6 +113,7 @@ INSERT INTO `avoir` (`CODE`, `CODE_1`) VALUES
 -- Structure de la table `chaine`
 --
 
+DROP TABLE IF EXISTS `chaine`;
 CREATE TABLE IF NOT EXISTS `chaine` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -142,6 +145,7 @@ INSERT INTO `chaine` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `date_heure`
 --
 
+DROP TABLE IF EXISTS `date_heure`;
 CREATE TABLE IF NOT EXISTS `date_heure` (
   `ID` char(32) NOT NULL,
   `ID_REL_1` char(32) NOT NULL,
@@ -186,6 +190,7 @@ INSERT INTO `date_heure` (`ID`, `ID_REL_1`, `DATEH`) VALUES
 -- Structure de la table `diffusion`
 --
 
+DROP TABLE IF EXISTS `diffusion`;
 CREATE TABLE IF NOT EXISTS `diffusion` (
   `CODE` char(32) NOT NULL,
   `ID` char(32) NOT NULL,
@@ -209,6 +214,7 @@ INSERT INTO `diffusion` (`CODE`, `ID`, `ID_1`) VALUES
 -- Structure de la table `intervenant`
 --
 
+DROP TABLE IF EXISTS `intervenant`;
 CREATE TABLE IF NOT EXISTS `intervenant` (
   `CODE` char(32) NOT NULL,
   `NOM` char(32) DEFAULT NULL,
@@ -259,6 +265,7 @@ INSERT INTO `intervenant` (`CODE`, `NOM`, `PRENOM`) VALUES
 -- Structure de la table `invite`
 --
 
+DROP TABLE IF EXISTS `invite`;
 CREATE TABLE IF NOT EXISTS `invite` (
   `CODE` char(32) NOT NULL,
   `TARIF` decimal(10,2) DEFAULT NULL,
@@ -271,15 +278,14 @@ CREATE TABLE IF NOT EXISTS `invite` (
 -- Déclencheurs `invite`
 --
 DROP TRIGGER IF EXISTS `before_insert_invite`;
-DELIMITER //
-CREATE TRIGGER `before_insert_invite` BEFORE INSERT ON `invite`
- FOR EACH ROW BEGIN
+DELIMITER $$
+CREATE TRIGGER `before_insert_invite` BEFORE INSERT ON `invite` FOR EACH ROW BEGIN
 IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
 THEN
 INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
 END IF; 
 END
-//
+$$
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -288,6 +294,7 @@ DELIMITER ;
 -- Structure de la table `nationalite`
 --
 
+DROP TABLE IF EXISTS `nationalite`;
 CREATE TABLE IF NOT EXISTS `nationalite` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -316,6 +323,7 @@ INSERT INTO `nationalite` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `periode`
 --
 
+DROP TABLE IF EXISTS `periode`;
 CREATE TABLE IF NOT EXISTS `periode` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -339,6 +347,7 @@ INSERT INTO `periode` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `presentateur`
 --
 
+DROP TABLE IF EXISTS `presentateur`;
 CREATE TABLE IF NOT EXISTS `presentateur` (
   `CODE` char(32) NOT NULL,
   `PROFESSION` char(32) DEFAULT NULL,
@@ -367,15 +376,14 @@ INSERT INTO `presentateur` (`CODE`, `PROFESSION`, `NOM`, `PRENOM`) VALUES
 -- Déclencheurs `presentateur`
 --
 DROP TRIGGER IF EXISTS `before_insert_presentateur`;
-DELIMITER //
-CREATE TRIGGER `before_insert_presentateur` BEFORE INSERT ON `presentateur`
- FOR EACH ROW BEGIN
+DELIMITER $$
+CREATE TRIGGER `before_insert_presentateur` BEFORE INSERT ON `presentateur` FOR EACH ROW BEGIN
 	IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
     THEN
     	INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
     END IF;
 END
-//
+$$
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -384,6 +392,7 @@ DELIMITER ;
 -- Structure de la table `programme`
 --
 
+DROP TABLE IF EXISTS `programme`;
 CREATE TABLE IF NOT EXISTS `programme` (
   `CODE` char(32) NOT NULL,
   `ID` char(32) DEFAULT NULL,
@@ -414,6 +423,7 @@ INSERT INTO `programme` (`CODE`, `ID`, `ID_CORRESPOND`, `ID_ORIGINAIRE`, `NOM`, 
 -- Structure de la table `realisateur`
 --
 
+DROP TABLE IF EXISTS `realisateur`;
 CREATE TABLE IF NOT EXISTS `realisateur` (
   `CODE` char(32) NOT NULL,
   `NBFILM` int(11) DEFAULT NULL,
@@ -442,15 +452,14 @@ INSERT INTO `realisateur` (`CODE`, `NBFILM`, `NOM`, `PRENOM`) VALUES
 -- Déclencheurs `realisateur`
 --
 DROP TRIGGER IF EXISTS `before_insert_realisateur`;
-DELIMITER //
-CREATE TRIGGER `before_insert_realisateur` BEFORE INSERT ON `realisateur`
- FOR EACH ROW BEGIN
+DELIMITER $$
+CREATE TRIGGER `before_insert_realisateur` BEFORE INSERT ON `realisateur` FOR EACH ROW BEGIN
 IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
 THEN
 INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
 END IF; 
 END
-//
+$$
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -459,6 +468,7 @@ DELIMITER ;
 -- Structure de la table `signaletique`
 --
 
+DROP TABLE IF EXISTS `signaletique`;
 CREATE TABLE IF NOT EXISTS `signaletique` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -481,6 +491,7 @@ INSERT INTO `signaletique` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `type_programme`
 --
 
+DROP TABLE IF EXISTS `type_programme`;
 CREATE TABLE IF NOT EXISTS `type_programme` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -492,14 +503,24 @@ CREATE TABLE IF NOT EXISTS `type_programme` (
 --
 
 INSERT INTO `type_programme` (`ID`, `LIBELLE`) VALUES
-('1', 'Film'),
-('2', 'Série TV'),
+('1', 'Cinema / Film'),
+('10', 'Series Comedie'),
+('11', 'Decouverte magazine'),
+('12', 'Jeunesse Animation'),
+('13', 'Sport / Magazine sport'),
+('14', 'Cinema / Film passion'),
+('15', NULL),
+('16', NULL),
+('17', NULL),
+('18', NULL),
+('2', 'Series Suspense'),
 ('3', 'Documentaire'),
-('4', 'Dessin-Animée'),
-('5', 'Cinéma'),
+('4', 'Dessin-Animee'),
+('5', 'Cinema / Film Suspense'),
 ('6', 'Autre'),
 ('7', 'Culture Infos'),
-('8', 'Sport');
+('8', 'Sport / Emission sportive'),
+('9', 'Cinema / Film Action-Aventure');
 
 --
 -- Contraintes pour les tables exportées
@@ -521,8 +542,8 @@ ALTER TABLE `avis`
 -- Contraintes pour la table `avoir`
 --
 ALTER TABLE `avoir`
-  ADD CONSTRAINT `avoir_ibfk_2` FOREIGN KEY (`CODE_1`) REFERENCES `programme` (`CODE`),
-  ADD CONSTRAINT `avoir_ibfk_1` FOREIGN KEY (`CODE`) REFERENCES `intervenant` (`CODE`);
+  ADD CONSTRAINT `avoir_ibfk_1` FOREIGN KEY (`CODE`) REFERENCES `intervenant` (`CODE`),
+  ADD CONSTRAINT `avoir_ibfk_2` FOREIGN KEY (`CODE_1`) REFERENCES `programme` (`CODE`);
 
 --
 -- Contraintes pour la table `date_heure`
@@ -534,9 +555,9 @@ ALTER TABLE `date_heure`
 -- Contraintes pour la table `diffusion`
 --
 ALTER TABLE `diffusion`
-  ADD CONSTRAINT `diffusion_ibfk_3` FOREIGN KEY (`ID_1`) REFERENCES `chaine` (`ID`),
   ADD CONSTRAINT `diffusion_ibfk_1` FOREIGN KEY (`CODE`) REFERENCES `programme` (`CODE`),
-  ADD CONSTRAINT `diffusion_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `date_heure` (`ID`);
+  ADD CONSTRAINT `diffusion_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `date_heure` (`ID`),
+  ADD CONSTRAINT `diffusion_ibfk_3` FOREIGN KEY (`ID_1`) REFERENCES `chaine` (`ID`);
 
 --
 -- Contraintes pour la table `invite`
@@ -554,9 +575,9 @@ ALTER TABLE `presentateur`
 -- Contraintes pour la table `programme`
 --
 ALTER TABLE `programme`
-  ADD CONSTRAINT `programme_ibfk_3` FOREIGN KEY (`ID_ORIGINAIRE`) REFERENCES `nationalite` (`ID`),
   ADD CONSTRAINT `programme_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `signaletique` (`ID`),
-  ADD CONSTRAINT `programme_ibfk_2` FOREIGN KEY (`ID_CORRESPOND`) REFERENCES `type_programme` (`ID`);
+  ADD CONSTRAINT `programme_ibfk_2` FOREIGN KEY (`ID_CORRESPOND`) REFERENCES `type_programme` (`ID`),
+  ADD CONSTRAINT `programme_ibfk_3` FOREIGN KEY (`ID_ORIGINAIRE`) REFERENCES `nationalite` (`ID`);
 
 --
 -- Contraintes pour la table `realisateur`

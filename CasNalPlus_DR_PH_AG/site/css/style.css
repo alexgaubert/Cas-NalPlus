@@ -1,4 +1,14 @@
 /* Global properties ======================================================== */
+.flotte {
+float:left;
+}
+
+.flotte2 {
+float:right;
+padding-right:50px;
+padding-top:10px;
+}
+
 html, body {width:100%; padding:0; margin:0;}
 
 body { 	 
