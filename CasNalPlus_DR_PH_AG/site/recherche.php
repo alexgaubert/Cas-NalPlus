@@ -1,6 +1,4 @@
 <?php
-require('Class/Connexion.class.php');
-
 error_reporting(0); // Désactiver le rapport d'erreurs
 // error_reporting(E_ALL); // Reporter toutes les erreurs PHP
 
@@ -137,50 +135,13 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 			</ul>
 			
          </nav>
-         <div id='slide'>			 
-            <div class='slider'>";
-			/*
+         <div id='slide'>		
+            <div class='slider'>
                 <ul class='items'>
                     <li><img src='images/slider-1.jpg' alt='' /><div class='banner'><div class='banner-1'></div><a href='#' class='button-1'>Read more</a></div></li>
                     <li><img src='images/slider-2.jpg' alt='' /><div class='banner'><div class='banner-2'></div><a href='#' class='button-1'>Read more</a></div></li>
                     <li><img src='images/slider-3.jpg' alt='' /><div class='banner'><div class='banner-3'></div><a href='#' class='button-1'>Read more</a></div></li>
                 </ul>
-				*/
-				
-				echo "
-				<table style='width:100%'>";
-				
-				$nvlleConnexion = new Connexion();
-				$bdd = $nvlleConnexion->IDconnexion;
-				
-				$SQL = "SELECT c.libelle, da.DATEH, p.nom FROM programme as p INNER JOIN diffusion as di on p.CODE = di.CODE
-				INNER JOIN chaine as c on di.ID_1 = c.ID INNER JOIN date_heure as da on di.ID = da.ID";
-					
-				$resultat = $bdd->query($SQL);	
-				
-				
-				while ($resultat1=$resultat->fetch(PDO::FETCH_BOTH))
-				{		
-					$heure = substr($resultat1[1],8,4);
-					
-					echo "
-					<tr>
-						<th>";
-							echo $resultat1[0] . "
-						</th>
-						<th>
-							". $heure . "
-						</th>
-						<th>
-							". $resultat1[2] . "
-						</th>
-					</tr>";
-				}
-				
-				echo "
-				</table>
-				
-				
             </div>	
             <a href='#' class='prev'></a><a href='#' class='next'></a>
             <div class='line-left'></div>
