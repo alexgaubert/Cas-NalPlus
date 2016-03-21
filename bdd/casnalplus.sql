@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 21 Mars 2016 à 19:24
+-- Généré le :  Lun 21 Mars 2016 à 23:07
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -125,12 +125,12 @@ CREATE TABLE IF NOT EXISTS `chaine` (
 --
 
 INSERT INTO `chaine` (`ID`, `LIBELLE`) VALUES
-('10', 'Nal+'),
-('11', 'Nal+ Decale'),
-('12', 'Nal+ Family'),
-('13', 'Nal+ Cinema'),
-('8', 'Nal+  Sport'),
-('9', 'Nal+ Series');
+('1', 'Nal+'),
+('2', 'Nal+ Cinema'),
+('3', 'Nal+ Series'),
+('4', 'Nal+ Sport'),
+('5', 'Nal+ Family'),
+('6', 'Nal+ Decale');
 
 -- --------------------------------------------------------
 
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `diffusion` (
 --
 
 INSERT INTO `diffusion` (`CODE`, `ID`, `ID_1`) VALUES
-('1', '1', '13');
+('1', '1', '2');
 
 -- --------------------------------------------------------
 

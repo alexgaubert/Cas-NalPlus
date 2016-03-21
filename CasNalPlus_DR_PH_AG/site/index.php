@@ -70,13 +70,14 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 // echo  $dateBBB . ", " . $dateBB . ", " . $dateB . ", <B>" . $dateJ . "</b>, " . $dateA . ", " . $dateAA . ", " . $dateAAA;
 			
     echo "<header>
-        <h1><a href='index.php?moment=apresmidi'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
+        <h1><a href='index.php?moment=apresmidi&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
         <nav>  
 			<ul class='menu2'>
 				<li><a href='recherche.php'><u>Rechercher un programme</u></a></li>
 				<li><a href='?day=".$dateJ."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'>".strtoupper($dateEntiere)."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'>".strtoupper($dateEntiere)."</a></li>
 				<li><a href='guilde.php'><u>Mon guilde Nal+</u></a></li>
 			</ul>
 			</br>
@@ -98,42 +99,42 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 			?>
                 <li <?php if($_GET['day'] == $dateBBB){ echo "class='current'"; }; echo"><a href='?day=".$dateBBB."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'> ".$dateBBB."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'> ".$dateBBB."</a></li>
                 <li "; if($_GET['day'] == $dateBB){ echo "class='current'"; }; echo"><a href='?day=".$dateBB."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'> ".$dateBB."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'> ".$dateBB."</a></li>
                 <li "; if($_GET['day'] == $dateB){ echo "class='current'"; }; echo"><a href='?day=".$dateB."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'> ".$dateB."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'> ".$dateB."</a></li>
                 <li "; if($_GET['day'] == $dateJ || !isset($_GET['day'])){ echo "class='current'"; }; echo"><a href='?day=".$dateJ."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'> ".$dateJ."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'> ".$dateJ."</a></li>
                 <li "; if($_GET['day'] == $dateA){ echo "class='current'"; }; echo"><a href='?day=".$dateA."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'> ".$dateA."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'> ".$dateA."</a></li>
                 <li "; if($_GET['day'] == $dateAA){ echo "class='current'"; }; echo"><a href='?day=".$dateAA."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'> ".$dateAA."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'> ".$dateAA."</a></li>
                 <li "; if($_GET['day'] == $dateAAA){ echo "class='current'"; }; echo"><a href='?day=".$dateAAA."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
-				echo "'> ".$dateAAA."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'> ".$dateAAA."</a></li>
             </ul>
 			<ul class='menu3'>
 				<li "; if($_GET['moment'] == 'nuit'){ echo "class='current'"; }; echo"><a href='?moment=nuit
 				&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
-				echo "'>".strtoupper('Nuit')."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'>".strtoupper('Nuit')."</a></li>
 				<li "; if($_GET['moment'] == 'matin'){ echo "class='current'"; }; echo"><a href='?moment=matin
 				&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
-				echo "'>".strtoupper('Matin')."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'>".strtoupper('Matin')."</a></li>
 				<li "; if($_GET['moment'] == 'apresmidi'){ echo "class='current'"; }; echo"><a href='?moment=apresmidi
 				&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
-				echo "'>".strtoupper('Apres-Midi')."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'>".strtoupper('Apres-Midi')."</a></li>
 				<li "; if($_GET['moment'] == 'debutsoiree'){ echo "class='current'"; }; echo"><a href='?moment=debutsoiree
 				&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
-				echo "'>".strtoupper('Debut de soiree')."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'>".strtoupper('Debut de soiree')."</a></li>
 				<li "; if($_GET['moment'] == 'soiree'){ echo "class='current'"; }; echo"><a href='?moment=soiree
 				&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
-				echo "'>".strtoupper('Soiree')."</a></li>
+				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'>".strtoupper('Soiree')."</a></li>
 			</ul>
 			
          </nav>
@@ -151,52 +152,129 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 				echo "
 				<table border='1' style='width:100%'>";
 				
-				$nvlleConnexion = new Connexion();
-				$bdd = $nvlleConnexion->IDconnexion;
+				// Recupère tous les nal +
+				$nvlleConnexion2 = new Connexion();
+				$bdd2 = $nvlleConnexion2->IDconnexion;
 				
-				$SQL = "SELECT UPPER(c.libelle), da.DATEH, p.nom, UPPER(t.LIBELLE), p.DUREE, p.INEDIT, p.HD
-				FROM programme as p INNER JOIN diffusion as di on p.CODE = di.CODE INNER JOIN chaine as c on di.ID_1 = c.ID INNER JOIN date_heure as da on di.ID = da.ID 
-				INNER JOIN type_programme as t on p.ID_CORRESPOND = t.ID";
+				$SQL0 = "SELECT UPPER(c.LIBELLE) FROM chaine as c LIMIT 0, 4";
 					
-				$resultat = $bdd->query($SQL);	
+				$resultat0 = $bdd2->query($SQL0);					
+								
+				$n=0;				
 				
-				
-				while ($resultat1=$resultat->fetch(PDO::FETCH_BOTH))
-				{		
-					$heure = substr($resultat1[1],10,6);
+				while ($resultat2=$resultat0->fetch(PDO::FETCH_BOTH))
+				{	
+					// Requete pour les programmes
+					$nvlleConnexion = new Connexion();
+					$bdd = $nvlleConnexion->IDconnexion;
 					
-					$duree1 = substr($resultat1[4],0,2);
-					$duree2 = substr($resultat1[4],3,2);
-					$duree = $duree1 . " H " . $duree2;
+					$fdf = $_GET['day'];
 					
-					$nal_avant = substr($resultat1[0], 0, 4); 
-					$nal_apres = substr($resultat1[0], 5, 20);
+					// var_dump($fdf);
+					$joursC = substr($fdf, 5, 2);
+					// var_dump($joursC); // 21
+					$mois = substr($fdf, 8, 12);
+					// var_dump($mois); // mars
+					$joursL = substr($fdf, 0, 3);
+					// var_dump($joursL); // lun
+					
+					$dateURL = strftime("%Y-%m-%d", mktime(0, 0, 0, date('m'), $joursC, date('y')));
+					// var_dump($dateURL);
+					
+					
+					$momento = $_GET['moment'];
+					// var_dump($momento);
+					
+					$SQL = "SELECT UPPER(c.libelle), da.DATEH, p.nom, UPPER(t.LIBELLE), p.DUREE, p.INEDIT, p.HD, pe.LIBELLE
+					FROM programme as p INNER JOIN diffusion as di on p.CODE = di.CODE INNER JOIN chaine as c on di.ID_1 = c.ID INNER JOIN date_heure as da on di.ID = da.ID 
+					INNER JOIN type_programme as t on p.ID_CORRESPOND = t.ID INNER JOIN periode as pe on da.ID_REL_1 = pe.ID
+					WHERE c.libelle = '" .$resultat2[0]. "' AND SUBSTR(da.DATEH, 1, 10) = '".$dateURL."' 
+					AND pe.LIBELLE = '".$momento."'			;"; //  AND da.DATEH = '" .. "' SUBSTR(`DATEH`, 1, 10)
+					
+					$resultat = $bdd->query($SQL);	
+					
+					// Tableau
+					$tab = array();
+					
+					while($resultat1=$resultat->fetch(PDO::FETCH_BOTH))
+					{
+						$tab[] = $resultat1;
+					}
+					// var_dump($tab[0][1]);
+					
+					$heure = substr($tab[0][1],10,6);
+					
+					$duree1 = substr($tab[0][4],0,2);
+					$duree2 = substr($tab[0][4],3,2);
+					
+					// var_dump($tab[0][4]);
+					
+					if(isset($tab[0][4]))
+					{
+						$duree = $duree1 . " H " . $duree2;
+					}
+					else
+					{
+						$duree = "";
+					}
+					
+					$nal_avant = substr($resultat2[0], 0, 4); 
+					$nal_apres = substr($resultat2[0], 5, 20);
 					$nal = $nal_avant . "</br>" . $nal_apres;
+										
 					
 					// Gestion Logo Nal+
 					if($nal_apres == "CINEMA")
 					{
-						$logo_nal = "<img width='30%' src='images\cinema.png'></img>";
-					}
-					else
-					{
-						$logo_nal = "<img width='30%' src=''></img>";
+						$nom.$n = "<img width='30%' src='images\cinema.png'></img>";
 					}
 					
+					if(empty($nal_apres))
+					{
+						$nom.$n = "<img width='30%' src='images\canalplus.png'></img>";
+					}
+					
+					if($nal_apres == "SERIES")
+					{
+						$nom.$n = "<img width='30%' src='images\series.png'></img>";
+					}
+					
+					if($nal_apres == "SPORT")
+					{
+						$nom.$n = "<img width='30%' src='images\sport.png'></img>";
+					}
+					
+					
 					// Gestion Rediffusion OU Avant première
-					if($resultat1[5] == 0)
+					if($tab[0][5] == 0)
 					{
 						$image_ap = "<img width='20%' src=''></img>";
-						$diffusion = "REDIFFUSION";
+						
+						if(isset($tab[0][5]))
+						{
+							$diffusion = "REDIFFUSION";
+						}
+						else
+						{
+							$diffusion = "";
+						}
 					}
 					else
 					{
 						$image_ap = "<img width='20%' src='images\ap.png'></img>";
-						$diffusion = "1ERE";
+						
+						if(isset($tab[0][5]))
+						{
+							$diffusion = "1ERE";
+						}
+						else
+						{
+							$diffusion = "";
+						}
 					}
 					
 					// Gestion HD ou pas
-					if($resultat1[6] == 1)
+					if($tab[0][6] == 1)
 					{
 						$image_hd = "<img width='20%' src='images\log_hd.png'></img>";
 					}
@@ -205,16 +283,38 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 						$image_hd = "<img src=''></img>";
 					}
 					
+					if(isset($tab[0][4]) && isset($tab[0][5]))
+					{
+						$duree_diffus = $duree." - ".$diffusion;
+					}
+					else
+					{
+						$duree_diffus = "";
+					}
+					
+					
 					// Ce qu'on affiche dans la cellule
-					$cellule = $heure . "</br><b>".$resultat1[2] ."</b></br><font color='grey'>" . $resultat1[3] . "</br>".$duree." - ".$diffusion."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+					$cellule = $heure . "</br><b>".$tab[0][2] ."</b></br><font color='grey'>" . $tab[0][3] . "</br>".$duree_diffus."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+					
+					
+					if(isset($_GET['total']))
+					{						
+						$total = $_GET['total']+1;
+					}
+					else
+					{
+						$total = 1;
+					}
 					
 					echo "
 					<tr>
-						<td align=center valign=middle height=80 width=25%>";
-							echo "<b>" . $logo_nal . "<p class='flotte2'>" . $nal . "</p></b>
+						<td align=center valign=middle height=83 width=25%>";
+							echo "<b>" . $nom.$n .  "<p class='flotte2'>" . $nal . "</p></b>
 						</td>
 						<td align=center valign=middle  bgcolor='gray' width=2%>";
-							echo "◁
+							echo "<font color='white'><a href='?total="; ?><?php if(isset($_GET['total'])) { $total = $_GET['total']-1; echo $total;} else{$total = 1; echo $total;}; ?><?php echo "
+							&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; echo "
+							&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; echo "'>◁</a></font>
 						</td>
 						<td valign=middle  width=20%>
 							<p class='flotte'>".$cellule . "</p><p>". $image_hd . "</br>" . $image_ap ."	</p>					
@@ -226,10 +326,14 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 							
 						</td>
 						<td align=center valign=middle  bgcolor='gray' width=2%>";
-							echo "▷
+							echo "<font color='white'><a href='?total="; ?><?php if(isset($_GET['total'])) { $total = $_GET['total']+1; echo $total;} else{$total = 1; echo $total;}; ?><?php echo "
+							&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; echo "
+							&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; echo "'>▷</a></font>
 						</td>
 					</tr>";
-					/* <HR width=100%> */
+					 /* <HR width=100%> */
+					 
+					$n=$n+1;
 				}
 				
 				echo "
