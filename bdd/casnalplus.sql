@@ -408,7 +408,17 @@ CREATE TABLE IF NOT EXISTS `programme` (
 --
 
 INSERT INTO `programme` (`CODE`, `ID`, `ID_CORRESPOND`, `ID_ORIGINAIRE`, `NOM`, `DUREE`, `DESCRIPTION`, `ANNEE`, `INEDIT`, `HD`) VALUES
-('1', '2', '1', '4', 'Fast And Furious', '02:00:00', 'Action', 2015, 0, 1);
+('1', '2', '1', '4', 'Fast And Furious', '02:00:00', 'Action', 2015, 0, 1),
+('2', '2', '16', '7', 'Favelas', '02:00:00', 'Thriller', 2014, 0, 0),
+('3', NULL, '13', '11', 'Manchester city/Manchester United', '02:00:00', 'Sport', 2016, 0, 1),
+('4', NULL, '1', '2', 'Taxi 2', '01:30:00', 'Action', 2000, 0, 0),
+('5', '1', '1', '4', 'Divergente 2 : L''insurrection', '02:00:00', 'Action', 2015, 1, 1),
+('6', NULL, '2', '11', 'Enquete de foot', '01:00:00', 'Sport', 2016, 0, 1),
+('7', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 1),
+('8', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 1),
+('9', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 1),
+('10', NULL, '1', '2', 'Taxi 3', '01:30:00', 'Action', 2003, 0, 0);
+
 
 -- --------------------------------------------------------
 
