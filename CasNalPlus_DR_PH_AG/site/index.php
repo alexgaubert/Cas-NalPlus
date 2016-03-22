@@ -71,7 +71,7 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 			
     echo "<header>
         <h1><a href='index.php?moment=apresmidi&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
-				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
+				echo "'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
         <nav>  
 			<ul class='menu2'>
 				<li><a href='recherche.php'><u>Rechercher un programme</u></a></li>
@@ -218,6 +218,36 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 						$duree = "";
 					}
 					
+					// cellule 2
+					$heure2 = substr($tab[1][1],10,6);
+					
+					$duree3 = substr($tab[1][4],0,2);
+					$duree4 = substr($tab[1][4],3,2);
+					
+					if(isset($tab[1][4]))
+					{
+						$duree5 = $duree3 . " H " . $duree4;
+					}
+					else
+					{
+						$duree5 = "";
+					}
+					
+					// cellule 3
+					$heure3 = substr($tab[2][1],10,6);
+					
+					$duree9 = substr($tab[2][4],0,2);
+					$duree8 = substr($tab[2][4],3,2);
+					
+					if(isset($tab[1][4]))
+					{
+						$duree6 = $duree9 . " H " . $duree8;
+					}
+					else
+					{
+						$duree6 = "";
+					}
+					
 					$nal_avant = substr($resultat2[0], 0, 4); 
 					$nal_apres = substr($resultat2[0], 5, 20);
 					$nal = $nal_avant . "</br>" . $nal_apres;
@@ -273,6 +303,64 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 						}
 					}
 					
+					// cellule 2
+					// Gestion Rediffusion OU Avant première
+					if($tab[1][5] == 0)
+					{
+						$image_ap2 = "<img width='20%' src=''></img>";
+						
+						if(isset($tab[1][5]))
+						{
+							$diffusion2 = "REDIFFUSION";
+						}
+						else
+						{
+							$diffusion2 = "";
+						}
+					}
+					else
+					{
+						$image_ap2 = "<img width='20%' src='images\ap.png'></img>";
+						
+						if(isset($tab[1][5]))
+						{
+							$diffusion2 = "1ERE";
+						}
+						else
+						{
+							$diffusion2 = "";
+						}
+					}
+					
+					// cellule 3
+					// Gestion Rediffusion OU Avant première
+					if($tab[2][5] == 0)
+					{
+						$image_ap3 = "<img width='20%' src=''></img>";
+						
+						if(isset($tab[2][5]))
+						{
+							$diffusion3 = "REDIFFUSION";
+						}
+						else
+						{
+							$diffusion3 = "";
+						}
+					}
+					else
+					{
+						$image_ap3 = "<img width='20%' src='images\ap.png'></img>";
+						
+						if(isset($tab[2][5]))
+						{
+							$diffusion3 = "1ERE";
+						}
+						else
+						{
+							$diffusion3 = "";
+						}
+					}
+					
 					// Gestion HD ou pas
 					if($tab[0][6] == 1)
 					{
@@ -292,9 +380,107 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 						$duree_diffus = "";
 					}
 					
+					// cellule 2
+					if($tab[1][6] == 1)
+					{
+						$image_hd2 = "<img width='20%' src='images\log_hd.png'></img>";
+					}
+					else
+					{
+						$image_hd2 = "<img src=''></img>";
+					}
 					
-					// Ce qu'on affiche dans la cellule
-					$cellule = $heure . "</br><b><a href='?film=".$tab[0][2]."&moment=".$_GET['moment']."&day=".$_GET['day']."&total=".$_GET['total']."#ancre1'>".$tab[0][2] ."</b></br><font color='grey'>" . $tab[0][3] . "</br>".$duree_diffus."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+					if(isset($tab[1][4]) && isset($tab[1][5]))
+					{
+						$duree_diffus2 = $duree5." - ".$diffusion2;
+					}
+					else
+					{
+						$duree_diffus2 = "";
+					}
+					
+					// cellule 2
+					if(isset($tab[1][4]) && isset($tab[1][5]))
+					{
+						$duree_diffus2 = $duree5." - ".$diffusion2;
+					}
+					else
+					{
+						$duree_diffus2 = "";
+					}
+					
+					// cellule 3
+					if($tab[2][6] == 1)
+					{
+						$image_hd3 = "<img width='20%' src='images\log_hd.png'></img>";
+					}
+					else
+					{
+						$image_hd3 = "<img src=''></img>";
+					}
+					
+					if(isset($tab[2][4]) && isset($tab[2][5]))
+					{
+						$duree_diffus3 = $duree6." - ".$diffusion3;
+					}
+					else
+					{
+						$duree_diffus3 = "";
+					}
+					
+					// cellule 3
+					if(isset($tab[2][4]) && isset($tab[2][5]))
+					{
+						$duree_diffus3 = $duree6." - ".$diffusion3;
+					}
+					else
+					{
+						$duree_diffus3 = "";
+					}
+					
+					
+					// var_dump(strlen($tab[0][2]));
+					
+					if(strlen($tab[0][2]) >= 19)
+					{
+						$lib_film = substr($tab[0][2], 0, 19) . "..";
+						// var_dump($lib_film);
+					}
+					else
+					{
+						$lib_film = $tab[0][2];
+					}
+					
+					if(strlen($tab[1][2]) >= 19)
+					{
+						$lib_film2 = substr($tab[1][2], 0, 19) . "..";
+						// var_dump($lib_film);
+					}
+					else
+					{
+						$lib_film2 = $tab[1][2];
+					}
+					
+					if(strlen($tab[2][2]) >= 19)
+					{
+						$lib_film3 = substr($tab[2][2], 0, 19) . "..";
+						// var_dump($lib_film);
+					}
+					else
+					{
+						$lib_film3 = $tab[2][2];
+					}
+					
+					// var_dump(stripslashes($tab[0][2]));
+					
+					// Ce qu'on affiche dans la cellule 1
+					$cellule = $heure . "</br><b><a href='?film=".addslashes($tab[0][2])."&moment=".$_GET['moment']."&day=".$_GET['day']."&total=".$_GET['total']."#ancre1'>".$lib_film ."</b></br><font color='grey'>" . $tab[0][3] . "</br>".$duree_diffus."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+					
+					// Ce qu'on affiche dans la cellule 2
+					$cellule2 = $heure2 . "</br><b><a href='?film=".addslashes($tab[1][2])."&moment=".$_GET['moment']."&day=".$_GET['day']."&total=".$_GET['total']."#ancre1'>".$lib_film2 ."</b></br><font color='grey'>" . $tab[1][3] . "</br>".$duree_diffus2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+					
+					// Ce qu'on affiche dans la cellule 3
+					$cellule3 = $heure3 . "</br><b><a href='?film=".addslashes($tab[2][2])."&moment=".$_GET['moment']."&day=".$_GET['day']."&total=".$_GET['total']."#ancre1'>".$lib_film3 ."</b></br><font color='grey'>" . $tab[2][3] . "</br>".$duree_diffus3."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
 					
 					
 					if(isset($_GET['total']))
@@ -320,10 +506,10 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 							<p class='flotte'>".$cellule . "</p><p>". $image_hd . "</br>" . $image_ap ."	</p>					
 						</td>
 						<td valign=middle  width=20%>
-							
+							<p class='flotte'>".$cellule2 . "</p><p>". $image_hd2 . "</br>" . $image_ap2 ."	</p>		
 						</td>
 						<td valign=middle  width=20%>
-							
+							<p class='flotte'>".$cellule3 . "</p><p>". $image_hd3 . "</br>" . $image_ap3 ."	</p>	
 						</td>
 						<td align=center valign=middle  bgcolor='gray' width=2%>";
 							echo "<font color='white'><a href='?total="; ?><?php if(isset($_GET['total'])) { $total = $_GET['total']+1; echo $total;} else{$total = 1; echo $total;}; ?><?php echo "
@@ -356,7 +542,7 @@ if(isset($_GET['film']))
 	</div>
     <section id='content'><div class='ic'>More Website Templates @ TemplateMonster.com. May 14, 2012!</div>
         <div class='slogan'>
-        	<p>Fiche du programme : <span class='clr-1'>".$_GET['film']."</span></p>
+        	<p>Fiche du programme : <span class='clr-1'>".stripslashes($_GET['film'])."</span></p>
             <p></br>Dominic Toretto et sa 'famille' doivent faire face à Deckard Shaw, bien décidé à se venger de la mort de son frère.
 			Le 'New York Daily New' a d'ailleurs décidé de mettre fin à ce suspens tendancieux en révélant les décisions de la production. Universal envisagerait ainsi d'utiliser pas moins de 4 doublures 
 			et de recourir aux images de synthèse pour rendre la présence de Paul Walker crédible.  Car le choix est clair pour l'équipe du film, le personnage de Brian O'Conner ne peut pas mourir et sera 

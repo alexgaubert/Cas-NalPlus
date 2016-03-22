@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 21 Mars 2016 à 23:07
--- Version du serveur :  5.7.9
--- Version de PHP :  5.6.16
+-- Généré le :  Mar 22 Mars 2016 à 15:50
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données :  `casnalplus`
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Structure de la table `acteur`
 --
 
-DROP TABLE IF EXISTS `acteur`;
 CREATE TABLE IF NOT EXISTS `acteur` (
   `CODE` char(32) NOT NULL,
   `COTE` decimal(10,2) DEFAULT NULL,
@@ -55,14 +54,15 @@ INSERT INTO `acteur` (`CODE`, `COTE`, `NOM`, `PRENOM`) VALUES
 -- Déclencheurs `acteur`
 --
 DROP TRIGGER IF EXISTS `before_insert_acteur`;
-DELIMITER $$
-CREATE TRIGGER `before_insert_acteur` BEFORE INSERT ON `acteur` FOR EACH ROW BEGIN
+DELIMITER //
+CREATE TRIGGER `before_insert_acteur` BEFORE INSERT ON `acteur`
+ FOR EACH ROW BEGIN
 IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
 THEN
 INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
 END IF; 
 END
-$$
+//
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -71,7 +71,6 @@ DELIMITER ;
 -- Structure de la table `avis`
 --
 
-DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `CODE` char(32) NOT NULL,
   `ID` char(32) NOT NULL,
@@ -87,7 +86,6 @@ CREATE TABLE IF NOT EXISTS `avis` (
 -- Structure de la table `avoir`
 --
 
-DROP TABLE IF EXISTS `avoir`;
 CREATE TABLE IF NOT EXISTS `avoir` (
   `CODE` char(32) NOT NULL,
   `CODE_1` char(32) NOT NULL,
@@ -113,7 +111,6 @@ INSERT INTO `avoir` (`CODE`, `CODE_1`) VALUES
 -- Structure de la table `chaine`
 --
 
-DROP TABLE IF EXISTS `chaine`;
 CREATE TABLE IF NOT EXISTS `chaine` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -138,7 +135,6 @@ INSERT INTO `chaine` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `date_heure`
 --
 
-DROP TABLE IF EXISTS `date_heure`;
 CREATE TABLE IF NOT EXISTS `date_heure` (
   `ID` char(32) NOT NULL,
   `ID_REL_1` char(32) NOT NULL,
@@ -183,7 +179,6 @@ INSERT INTO `date_heure` (`ID`, `ID_REL_1`, `DATEH`) VALUES
 -- Structure de la table `diffusion`
 --
 
-DROP TABLE IF EXISTS `diffusion`;
 CREATE TABLE IF NOT EXISTS `diffusion` (
   `CODE` char(32) NOT NULL,
   `ID` char(32) NOT NULL,
@@ -199,7 +194,52 @@ CREATE TABLE IF NOT EXISTS `diffusion` (
 --
 
 INSERT INTO `diffusion` (`CODE`, `ID`, `ID_1`) VALUES
-('1', '1', '2');
+('1', '1', '2'),
+('10', '9', '4'),
+('2', '13', '3'),
+('3', '14', '1'),
+('4', '15', '4'),
+('5', '16', '2'),
+('6', '2', '3'),
+('7', '18', '3'),
+('8', '19', '3'),
+('9', '20', '1'),
+('11', '16', '1'),
+('12', '18', '1'),
+('13', '18', '2'),
+('14', '19', '2'),
+('15', '17', '4'),
+('16', '18', '4'),
+('17', '1', '1'),
+('18', '3', '1'),
+('19', '5', '1'),
+('20', '4', '2'),
+('21', '6', '2'),
+('22', '5', '3'),
+('23', '6', '3'),
+('24', '3', '4'),
+('25', '4', '4'),
+('26', '6', '4'),
+('27', '7', '1'),
+('28', '10', '1'),
+('29', '12', '1'),
+('30', '8', '2'),
+('31', '9', '2'),
+('32', '11', '2'),
+('33', '10', '3'),
+('34', '11', '3'),
+('35', '12', '3'),
+('36', '11', '4'),
+('37', '12', '4'),
+('38', '20', '2'),
+('39', '21', '2'),
+('40', '22', '2'),
+('41', '21', '3'),
+('42', '22', '3'),
+('43', '22', '4'),
+('44', '23', '1'),
+('45', '24', '2'),
+('46', '23', '4');
 
 -- --------------------------------------------------------
 
@@ -207,7 +247,6 @@ INSERT INTO `diffusion` (`CODE`, `ID`, `ID_1`) VALUES
 -- Structure de la table `intervenant`
 --
 
-DROP TABLE IF EXISTS `intervenant`;
 CREATE TABLE IF NOT EXISTS `intervenant` (
   `CODE` char(32) NOT NULL,
   `NOM` char(32) DEFAULT NULL,
@@ -258,7 +297,6 @@ INSERT INTO `intervenant` (`CODE`, `NOM`, `PRENOM`) VALUES
 -- Structure de la table `invite`
 --
 
-DROP TABLE IF EXISTS `invite`;
 CREATE TABLE IF NOT EXISTS `invite` (
   `CODE` char(32) NOT NULL,
   `TARIF` decimal(10,2) DEFAULT NULL,
@@ -271,14 +309,15 @@ CREATE TABLE IF NOT EXISTS `invite` (
 -- Déclencheurs `invite`
 --
 DROP TRIGGER IF EXISTS `before_insert_invite`;
-DELIMITER $$
-CREATE TRIGGER `before_insert_invite` BEFORE INSERT ON `invite` FOR EACH ROW BEGIN
+DELIMITER //
+CREATE TRIGGER `before_insert_invite` BEFORE INSERT ON `invite`
+ FOR EACH ROW BEGIN
 IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
 THEN
 INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
 END IF; 
 END
-$$
+//
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -287,7 +326,6 @@ DELIMITER ;
 -- Structure de la table `nationalite`
 --
 
-DROP TABLE IF EXISTS `nationalite`;
 CREATE TABLE IF NOT EXISTS `nationalite` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -316,7 +354,6 @@ INSERT INTO `nationalite` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `periode`
 --
 
-DROP TABLE IF EXISTS `periode`;
 CREATE TABLE IF NOT EXISTS `periode` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -340,7 +377,6 @@ INSERT INTO `periode` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `presentateur`
 --
 
-DROP TABLE IF EXISTS `presentateur`;
 CREATE TABLE IF NOT EXISTS `presentateur` (
   `CODE` char(32) NOT NULL,
   `PROFESSION` char(32) DEFAULT NULL,
@@ -369,14 +405,15 @@ INSERT INTO `presentateur` (`CODE`, `PROFESSION`, `NOM`, `PRENOM`) VALUES
 -- Déclencheurs `presentateur`
 --
 DROP TRIGGER IF EXISTS `before_insert_presentateur`;
-DELIMITER $$
-CREATE TRIGGER `before_insert_presentateur` BEFORE INSERT ON `presentateur` FOR EACH ROW BEGIN
+DELIMITER //
+CREATE TRIGGER `before_insert_presentateur` BEFORE INSERT ON `presentateur`
+ FOR EACH ROW BEGIN
 	IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
     THEN
     	INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
     END IF;
 END
-$$
+//
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -385,7 +422,6 @@ DELIMITER ;
 -- Structure de la table `programme`
 --
 
-DROP TABLE IF EXISTS `programme`;
 CREATE TABLE IF NOT EXISTS `programme` (
   `CODE` char(32) NOT NULL,
   `ID` char(32) DEFAULT NULL,
@@ -409,16 +445,51 @@ CREATE TABLE IF NOT EXISTS `programme` (
 
 INSERT INTO `programme` (`CODE`, `ID`, `ID_CORRESPOND`, `ID_ORIGINAIRE`, `NOM`, `DUREE`, `DESCRIPTION`, `ANNEE`, `INEDIT`, `HD`) VALUES
 ('1', '2', '1', '4', 'Fast And Furious', '02:00:00', 'Action', 2015, 0, 1),
-('2', '2', '16', '7', 'Favelas', '02:00:00', 'Thriller', 2014, 0, 0),
-('3', NULL, '13', '11', 'Manchester city/Manchester United', '02:00:00', 'Sport', 2016, 0, 1),
-('4', NULL, '1', '2', 'Taxi 2', '01:30:00', 'Action', 2000, 0, 0),
-('5', '1', '1', '4', 'Divergente 2 : L''insurrection', '02:00:00', 'Action', 2015, 1, 1),
+('10', NULL, '1', '2', 'Taxi 3', '01:30:00', 'Action', 2003, 0, 0),
+('2', '2', '7', '7', 'Favelas', '02:00:00', 'Thriller', 2014, 0, 0),
+('3', NULL, '13', '11', 'Manchester city/Manchester Unite', '02:00:00', 'Sport', 2016, 0, 1),
+('4', NULL, '1', '2', 'Taxi 2', '01:30:00', 'Action', 2000, 1, 0),
+('5', '1', '1', '4', 'Divergente 2 : L''insurrection', '02:00:00', 'Action', 2015, 0, 1),
 ('6', NULL, '2', '11', 'Enquete de foot', '01:00:00', 'Sport', 2016, 0, 1),
-('7', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 1),
-('8', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 1),
-('9', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 1),
-('10', NULL, '1', '2', 'Taxi 3', '01:30:00', 'Action', 2003, 0, 0);
-
+('7', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('8', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('9', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 0, 1),
+('11', '2', '1', '4', 'Fast And Furious', '02:00:00', 'Action', 2015, 0, 1),
+('12', NULL, '1', '2', 'Taxi 3', '01:30:00', 'Action', 2003, 0, 0),
+('13', '2', '7', '7', 'Favelas', '02:00:00', 'Thriller', 2014, 0, 0),
+('14', NULL, '13', '11', 'Manchester city/Manchester Unite', '02:00:00', 'Sport', 2016, 0, 1),
+('15', NULL, '1', '2', 'Taxi 2', '01:30:00', 'Action', 2000, 1, 0),
+('16', '1', '1', '4', 'Divergente 2 : L''insurrection', '02:00:00', 'Action', 2015, 0, 1),
+('17', NULL, '2', '11', 'Enquete de foot', '01:00:00', 'Sport', 2016, 0, 1),
+('18', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('19', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('20', '2', '1', '4', 'Fast And Furious', '02:00:00', 'Action', 2015, 0, 1),
+('21', NULL, '1', '2', 'Taxi 3', '01:30:00', 'Action', 2003, 0, 0),
+('22', '2', '7', '7', 'Favelas', '02:00:00', 'Thriller', 2014, 0, 0),
+('23', NULL, '13', '11', 'Manchester city/Manchester Unite', '02:00:00', 'Sport', 2016, 0, 1),
+('24', NULL, '1', '2', 'Taxi 2', '01:30:00', 'Action', 2000, 1, 0),
+('25', '1', '1', '4', 'Divergente 2 : L''insurrection', '02:00:00', 'Action', 2015, 0, 1),
+('26', NULL, '2', '11', 'Enquete de foot', '01:00:00', 'Sport', 2016, 0, 1),
+('27', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('28', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('29', '2', '1', '4', 'Fast And Furious', '02:00:00', 'Action', 2015, 0, 1),
+('30', NULL, '1', '2', 'Taxi 3', '01:30:00', 'Action', 2003, 0, 0),
+('31', '2', '7', '7', 'Favelas', '02:00:00', 'Thriller', 2014, 0, 0),
+('32', NULL, '13', '11', 'Manchester city/Manchester Unite', '02:00:00', 'Sport', 2016, 0, 1),
+('33', NULL, '1', '2', 'Taxi 2', '01:30:00', 'Action', 2000, 1, 0),
+('34', '1', '1', '4', 'Divergente 2 : L''insurrection', '02:00:00', 'Action', 2015, 0, 1),
+('35', NULL, '2', '11', 'Enquete de foot', '01:00:00', 'Sport', 2016, 0, 1),
+('36', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('37', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('38', '2', '1', '4', 'Fast And Furious', '02:00:00', 'Action', 2015, 0, 1),
+('39', NULL, '1', '2', 'Taxi 3', '01:30:00', 'Action', 2003, 0, 0),
+('40', '2', '7', '7', 'Favelas', '02:00:00', 'Thriller', 2014, 0, 0),
+('41', NULL, '13', '11', 'Manchester city/Manchester Unite', '02:00:00', 'Sport', 2016, 0, 1),
+('42', NULL, '1', '2', 'Taxi 2', '01:30:00', 'Action', 2000, 1, 0),
+('43', '1', '1', '4', 'Divergente 2 : L''insurrection', '02:00:00', 'Action', 2015, 0, 1),
+('44', NULL, '2', '11', 'Enquete de foot', '01:00:00', 'Sport', 2016, 0, 1),
+('45', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0),
+('46', '2', '10', '12', 'Vikings', '00:40:00', 'Action', 2013, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -426,7 +497,6 @@ INSERT INTO `programme` (`CODE`, `ID`, `ID_CORRESPOND`, `ID_ORIGINAIRE`, `NOM`, 
 -- Structure de la table `realisateur`
 --
 
-DROP TABLE IF EXISTS `realisateur`;
 CREATE TABLE IF NOT EXISTS `realisateur` (
   `CODE` char(32) NOT NULL,
   `NBFILM` int(11) DEFAULT NULL,
@@ -455,14 +525,15 @@ INSERT INTO `realisateur` (`CODE`, `NBFILM`, `NOM`, `PRENOM`) VALUES
 -- Déclencheurs `realisateur`
 --
 DROP TRIGGER IF EXISTS `before_insert_realisateur`;
-DELIMITER $$
-CREATE TRIGGER `before_insert_realisateur` BEFORE INSERT ON `realisateur` FOR EACH ROW BEGIN
+DELIMITER //
+CREATE TRIGGER `before_insert_realisateur` BEFORE INSERT ON `realisateur`
+ FOR EACH ROW BEGIN
 IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
 THEN
 INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
 END IF; 
 END
-$$
+//
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -471,7 +542,6 @@ DELIMITER ;
 -- Structure de la table `signaletique`
 --
 
-DROP TABLE IF EXISTS `signaletique`;
 CREATE TABLE IF NOT EXISTS `signaletique` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -494,7 +564,6 @@ INSERT INTO `signaletique` (`ID`, `LIBELLE`) VALUES
 -- Structure de la table `type_programme`
 --
 
-DROP TABLE IF EXISTS `type_programme`;
 CREATE TABLE IF NOT EXISTS `type_programme` (
   `ID` char(32) NOT NULL,
   `LIBELLE` char(32) DEFAULT NULL,
@@ -573,20 +642,6 @@ ALTER TABLE `invite`
 --
 ALTER TABLE `presentateur`
   ADD CONSTRAINT `presentateur_ibfk_1` FOREIGN KEY (`CODE`) REFERENCES `intervenant` (`CODE`);
-
---
--- Contraintes pour la table `programme`
---
-ALTER TABLE `programme`
-  ADD CONSTRAINT `programme_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `signaletique` (`ID`),
-  ADD CONSTRAINT `programme_ibfk_2` FOREIGN KEY (`ID_CORRESPOND`) REFERENCES `type_programme` (`ID`),
-  ADD CONSTRAINT `programme_ibfk_3` FOREIGN KEY (`ID_ORIGINAIRE`) REFERENCES `nationalite` (`ID`);
-
---
--- Contraintes pour la table `realisateur`
---
-ALTER TABLE `realisateur`
-  ADD CONSTRAINT `realisateur_ibfk_1` FOREIGN KEY (`CODE`) REFERENCES `intervenant` (`CODE`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
