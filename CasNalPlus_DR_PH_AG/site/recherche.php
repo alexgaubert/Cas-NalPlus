@@ -52,6 +52,7 @@ echo"<!DOCTYPE html>
 <div class='bg-2'>
   <!--==============================header=================================-->";
   
+  
   setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
 $dateBBB = strftime("%a %d %B", mktime(0, 0, 0, date('m'), date('d')-3, date('y')));
@@ -68,8 +69,9 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 // echo  $dateBBB . ", " . $dateBB . ", " . $dateB . ", <B>" . $dateJ . "</b>, " . $dateA . ", " . $dateAA . ", " . $dateAAA;
 			
     echo "<header>
-        <h1><a href='index.php?moment=apresmidi'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
-        <nav>  
+        <h1><a href='index.php?moment=apresmidi&day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ; }; 
+				echo "'><img src='images/Canal+_Cinéma_HD_2013.svg.png' width=300 alt=''></a></h1>
+        <nav> 
 			<ul class='menu2'>
 				<li><a href='recherche.php'><u>Rechercher un programme</u></a></li>
 				<li><a href='?day=".$dateJ."
@@ -77,16 +79,15 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 				echo "'>".strtoupper($dateEntiere)."</a></li>
 				<li><a href='guilde.php'><u>Mon guilde Nal+</u></a></li>
 			</ul>
-			</br>
             <ul class='menu'>";
-		
+		/*
 			
-			/*
+			
 				<li><a href='about.php'>About</a></li>
                 <li><a href='services.php'>Services</a></li>
                 <li><a href='products.php'>Products</a></li>
                 <li><a href='contacts.php'>Contacts</a></li>
-			*/
+			
 			
 			// if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';};
 			// &day="; if(isset($_GET['day'])) { echo $_GET['day']; } else { echo $dateJ}; 
@@ -148,45 +149,111 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
             <div class='line-right'></div>
             <ul class='pags'></ul>
          </div>
+		 */
+		 echo "
     </header>   
-  <!--==============================content================================-->";
-  /*
+  <!--==============================content================================-->
+  
     <section id='content'><div class='ic'>More Website Templates @ TemplateMonster.com. May 14, 2012!</div>
         <div class='slogan'>
-        	<p>We <span class='clr-1'>provide</span> you with the <span class='clr-1'>highest</span>  level of <span class='clr-1'>services</span></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vivamus sed arcu dui eu tincidunt sem.</p>
-            <a href='#' class='button-2'>click here</a>
+        	<p>Sur quel <span class='clr-1'>mot clé</span> voulez-vous effectuer votre <span class='clr-1'>recherche</span> ?</p>
+            <p>Plusieurs choix s'offrent à vous, vous n'avez juste qu'à cocher les cases puis remplir les </br>
+			zones de champs qui s'affichent et lancer la recherche en cliquant sur le bouton ci-dessous. </p>
+            <a href='#' class='button-2'>Démarrer</a>
         </div>
         <div class='wrap page1-row1'>
         	<div class='box-1 border-right'>
             	<strong class='number number-1'>01.</strong>
-                <span class='text-1'>Smart</span>
-                <p class='text-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p class='text-3'>Vivamus sed arcu dui, eu tincidunt sem. Vivamus hendrerit mauris ut dui.</p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Nom</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
             </div>
             <div class='box-1 border-right'>
             	<strong class='number number-2'>02.</strong>
-                <span class='text-1'>Stable</span>
-                <p class='text-2'>Vivamus sed arcu dui, eu tincidunt sem. </p>
-                <p class='text-3'>Vivamus hendrerit mauris ut dui. gravida ut viverra lectus tincidunt. </p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Genre</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
             </div>
             <div class='box-1 border-right'>
             	<strong class='number number-3'>03.</strong>
-                <span class='text-1'>Dynamic</span>
-                <p class='text-2'>Cras mattis tempor eros nec tristique.</p>
-                <p class='text-3'>Sed sed felis arcu, vel vehicula augue. Maecenas faucibus sagittis cursus. </p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Année</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
             </div>
             <div class='box-1 last'>
             	<strong class='number number-4'>04.</strong>
-                <span class='text-1'>Grow</span>
-                <p class='text-2'>Maecenas faucibus sagittis cursus. </p>
-                <p class='text-3'>Fusce tincidunt, tellus eget tristique cursus, orci mi iaculis sem, sit amet dictum velit velit</p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Durée</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
             </div>
         </div>
+		<div class='wrap page1-row1'>
+        	<div class='box-1 border-right'>
+            	<strong class='number number-1'>05.</strong>
+                <span class='text-1'>Nationnalité</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
+            </div>
+            <div class='box-1 border-right'>
+            	<strong class='number number-2'>06.</strong>
+                <span class='text-1'>Chaîne</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
+            </div>
+            <div class='box-1 border-right'>
+            	<strong class='number number-3'>07.</strong>
+                <span class='text-1'>Réalisateur</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
+            </div>
+            <div class='box-1 last'>
+            	<strong class='number number-4'>08.</strong>
+                <span class='text-1'>Présentateur</span>
+					<select class='text-2' name='select'>
+					  <option value='value1'>Valeur 1</option> 
+					  <option value='value2' selected>Valeur 2</option>
+					  <option value='value3'>Valeur 3</option>
+					</select>
+					<p class='text-3'></p>
+                <input id='' type='checkbox'>
+            </div>
+        </div>";
+		/*
         <div class='wrap page1-row2'>
         	<div class='page1-col-1 border-right'>
             	<h2>We know what it takes<strong class='clr-1'>to be the leader</strong></h2>
@@ -195,7 +262,7 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
                     <p class=' extra-wrap clr-1'>Vertex  is one of <a href='http://blog.templatemonster.com/free-website-templates/' target='_blank' class='link'>free website templates</a> created by TemplateMonster.com team. This website template is optimized for 1280X1024 screen resolution. Lorem ipsum dolor sit amet, consectetur. </p>
                 </div>
                 <p><strong>It is also XHTML & CSS valid.</strong> The PSD source files of this <a href='http://blog.templatemonster.com/2012/05/14/free-website-template-business-jquery-powered-slider/' class='link' target='_blank' rel='nofollow'>Vertex</a>  template are available for free for the registered members of TemplateMonster.com. Feel free to get them! Vivamus sed arcu dui,<br> eu tincidunt sem. </p>
-                <a href='#' class='link-2'>Read more</a>
+                <a href='#' class='link-1'>Go</a>
             </div>
             <div class='page1-col-2 border-right'>
             	<h2><span class='clr-1'>N</span>ews</h2>
@@ -207,7 +274,7 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
                 	<a href='#' class='link-3'>05.15</a>
                     <p><a href='#' class='link'><strong>Vivamus sed arcu dui, eu tincidunt sem.</strong></a> Vivamus hendrerit mauris ut dui gravida ut viverra lectus tincidunt. </p>
                 </div>
-                <a href='#' class='link-2'>Read more</a>
+                <a href='#' class='link-1'>Go</a>
             </div>   
             <div class='page1-col-3'>
             	<h2><span class='clr-1'>S</span>ervices</h2>
@@ -224,9 +291,9 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
                 </ul>
             </div>     
         </div>
+		*/
+		echo "
     </section> 
-	*/
-	echo "
 </div>       
 </div> 
 <!--==============================aside=================================-->

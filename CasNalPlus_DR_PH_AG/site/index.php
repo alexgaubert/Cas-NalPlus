@@ -54,7 +54,7 @@ echo"<!DOCTYPE html>
 <div class='bg-2'>
   <!--==============================header=================================-->";
   
-  setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
+    setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
 $dateBBB = strftime("%a %d %B", mktime(0, 0, 0, date('m'), date('d')-3, date('y')));
 $dateBB = strftime("%a %d %B", mktime(0, 0, 0, date('m'), date('d')-2, date('y')));
@@ -67,6 +67,12 @@ $dateAAA = strftime("%a %d %B", mktime(0, 0, 0, date('m'), date('d')+3, date('y'
 
 $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('y')));
 
+
+if(empty($_SERVER['QUERY_STRING']))
+{
+	header("Location: index.php?moment=apresmidi&day=$dateJ" );
+}
+
 // echo  $dateBBB . ", " . $dateBB . ", " . $dateB . ", <B>" . $dateJ . "</b>, " . $dateA . ", " . $dateAA . ", " . $dateAAA;
 			
     echo "<header>
@@ -78,10 +84,12 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 				<li><a href='?day=".$dateJ."
 				&moment="; if(isset($_GET['moment'])) { echo $_GET['moment']; } else { echo 'apresmidi';}; 
 				echo "&total="; if(isset($_GET['total'])) { echo $_GET['total']; } echo "'>".strtoupper($dateEntiere)."</a></li>
-				<li><a href='guilde.php'><u>Mon guilde Nal+</u></a></li>
+				<li><a href='#'><u>Mon guilde Nal+</u></a></li>
 			</ul>
 			</br>
             <ul class='menu'>";
+			
+	
 		
 			
 			/*
