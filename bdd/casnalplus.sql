@@ -57,10 +57,10 @@ DROP TRIGGER IF EXISTS `before_insert_acteur`;
 DELIMITER //
 CREATE TRIGGER `before_insert_acteur` BEFORE INSERT ON `acteur`
  FOR EACH ROW BEGIN
-IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
-THEN
-INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
-END IF; 
+	if(new.COTE<0)
+    THEN
+    	set new.COTE=0;
+    END IF;
 END
 //
 DELIMITER ;
@@ -80,6 +80,25 @@ CREATE TABLE IF NOT EXISTS `avis` (
   KEY `I_FK_AVIS_PROGRAMME` (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déclencheurs `avis`
+--
+DROP TRIGGER IF EXISTS `before_insert_avis`;
+DELIMITER //
+CREATE TRIGGER `before_insert_avis` BEFORE INSERT ON `avis`
+ FOR EACH ROW BEGIN
+	if(new.NOTE<0)
+    THEN
+    	set new.NOTE=0;
+    END IF;
+    if(new.NOTE>5)
+    THEN
+    	set new.NOTE = 5;
+    END IF;
+    
+END
+//
+DELIMITER ;
 -- --------------------------------------------------------
 
 --
@@ -190,6 +209,21 @@ CREATE TABLE IF NOT EXISTS `diffusion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Déclencheurs `diffusion`
+--
+DROP TRIGGER IF EXISTS `before_insert_diffusion`;
+DELIMITER //
+CREATE TRIGGER `before_insert_diffusion` BEFORE INSERT ON `diffusion`
+ FOR EACH ROW BEGIN
+	IF EXISTS(SELECT*FROM diffusion WHERE ID=new.ID AND ID_1=new.ID_1)
+    THEN
+    	signal sqlstate '16440' set message_text = 'programme deja present à cette heure sur cette chaine';
+    END IF;
+END
+//
+DELIMITER ;
+-- --------------------------------------------------------
+--
 -- Contenu de la table `diffusion`
 --
 
@@ -255,6 +289,22 @@ CREATE TABLE IF NOT EXISTS `intervenant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Déclencheurs `intervenant`
+--
+DROP TRIGGER IF EXISTS `before_delete_intervenant`;
+DELIMITER //
+CREATE TRIGGER `before_delete_intervenant` BEFORE DELETE ON `intervenant`
+ FOR EACH ROW BEGIN
+	DELETE FROM acteur WHERE CODE = old.CODE;
+    DELETE FROM invite WHERE CODE = old.CODE;
+    DELETE FROM presentateur WHERE CODE = old.CODE;
+    DELETE FROM realisateur WHERE CODE = old.CODE;
+END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+--
 -- Contenu de la table `intervenant`
 --
 
@@ -305,22 +355,6 @@ CREATE TABLE IF NOT EXISTS `invite` (
   PRIMARY KEY (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déclencheurs `invite`
---
-DROP TRIGGER IF EXISTS `before_insert_invite`;
-DELIMITER //
-CREATE TRIGGER `before_insert_invite` BEFORE INSERT ON `invite`
- FOR EACH ROW BEGIN
-IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
-THEN
-INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
-END IF; 
-END
-//
-DELIMITER ;
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `nationalite`
@@ -401,22 +435,7 @@ INSERT INTO `presentateur` (`CODE`, `PROFESSION`, `NOM`, `PRENOM`) VALUES
 ('28', 'Chirurgien-dentiste', NULL, NULL),
 ('29', 'Conseil en investissements finan', NULL, NULL);
 
---
--- Déclencheurs `presentateur`
---
-DROP TRIGGER IF EXISTS `before_insert_presentateur`;
-DELIMITER //
-CREATE TRIGGER `before_insert_presentateur` BEFORE INSERT ON `presentateur`
- FOR EACH ROW BEGIN
-	IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
-    THEN
-    	INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
-    END IF;
-END
-//
-DELIMITER ;
 
--- --------------------------------------------------------
 
 --
 -- Structure de la table `programme`
@@ -521,22 +540,7 @@ INSERT INTO `realisateur` (`CODE`, `NBFILM`, `NOM`, `PRENOM`) VALUES
 ('30', 45, NULL, NULL),
 ('31', 26, NULL, NULL);
 
---
--- Déclencheurs `realisateur`
---
-DROP TRIGGER IF EXISTS `before_insert_realisateur`;
-DELIMITER //
-CREATE TRIGGER `before_insert_realisateur` BEFORE INSERT ON `realisateur`
- FOR EACH ROW BEGIN
-IF NOT EXISTS(SELECT*FROM intervenant WHERE CODE = new.CODE)
-THEN
-INSERT INTO intervenant VALUES(new.CODE, new.NOM, new.PRENOM);
-END IF; 
-END
-//
-DELIMITER ;
 
--- --------------------------------------------------------
 
 --
 -- Structure de la table `signaletique`
