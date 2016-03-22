@@ -294,7 +294,7 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
 					
 					
 					// Ce qu'on affiche dans la cellule
-					$cellule = $heure . "</br><b>".$tab[0][2] ."</b></br><font color='grey'>" . $tab[0][3] . "</br>".$duree_diffus."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
+					$cellule = $heure . "</br><b><a href='?film=".$tab[0][2]."&moment=".$_GET['moment']."&day=".$_GET['day']."&total=".$_GET['total']."#ancre1'>".$tab[0][2] ."</b></br><font color='grey'>" . $tab[0][3] . "</br>".$duree_diffus."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>";
 					
 					
 					if(isset($_GET['total']))
@@ -348,43 +348,47 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
          </div>
     </header>   
   <!--==============================content================================-->";
-  /*
+
+if(isset($_GET['film']))
+{
+	echo "
+	<div id='ancre1'>
+	</div>
     <section id='content'><div class='ic'>More Website Templates @ TemplateMonster.com. May 14, 2012!</div>
         <div class='slogan'>
-        	<p>We <span class='clr-1'>provide</span> you with the <span class='clr-1'>highest</span>  level of <span class='clr-1'>services</span></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vivamus sed arcu dui eu tincidunt sem.</p>
-            <a href='#' class='button-2'>click here</a>
+        	<p>Fiche du programme : <span class='clr-1'>".$_GET['film']."</span></p>
+            <p></br>Dominic Toretto et sa 'famille' doivent faire face à Deckard Shaw, bien décidé à se venger de la mort de son frère.
+			Le 'New York Daily New' a d'ailleurs décidé de mettre fin à ce suspens tendancieux en révélant les décisions de la production. Universal envisagerait ainsi d'utiliser pas moins de 4 doublures 
+			et de recourir aux images de synthèse pour rendre la présence de Paul Walker crédible.  Car le choix est clair pour l'équipe du film, le personnage de Brian O'Conner ne peut pas mourir et sera 
+			alors mis à la retraite à la fin de ce 7e épisode.</br></br></p>
+		
+			
+            <a href='#' class='button-2'>Remonter</a>
         </div>
         <div class='wrap page1-row1'>
         	<div class='box-1 border-right'>
             	<strong class='number number-1'>01.</strong>
-                <span class='text-1'>Smart</span>
-                <p class='text-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p class='text-3'>Vivamus sed arcu dui, eu tincidunt sem. Vivamus hendrerit mauris ut dui.</p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Genre</span>
+                <p class='text-3'>Action</p>
             </div>
             <div class='box-1 border-right'>
             	<strong class='number number-2'>02.</strong>
-                <span class='text-1'>Stable</span>
-                <p class='text-2'>Vivamus sed arcu dui, eu tincidunt sem. </p>
-                <p class='text-3'>Vivamus hendrerit mauris ut dui. gravida ut viverra lectus tincidunt. </p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Date de sortie</span>
+                <p class='text-3'>2007</p>
             </div>
             <div class='box-1 border-right'>
             	<strong class='number number-3'>03.</strong>
-                <span class='text-1'>Dynamic</span>
-                <p class='text-2'>Cras mattis tempor eros nec tristique.</p>
-                <p class='text-3'>Sed sed felis arcu, vel vehicula augue. Maecenas faucibus sagittis cursus. </p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Durée</span>
+                <p class='text-3'>1h30</p>
             </div>
             <div class='box-1 last'>
             	<strong class='number number-4'>04.</strong>
-                <span class='text-1'>Grow</span>
-                <p class='text-2'>Maecenas faucibus sagittis cursus. </p>
-                <p class='text-3'>Fusce tincidunt, tellus eget tristique cursus, orci mi iaculis sem, sit amet dictum velit velit</p>
-                <a href='#' class='link-1'>Read more</a>
+                <span class='text-1'>Réalisé par</span>
+                <p class='text-3'>Martin Weisz</p>
             </div>
-        </div>
+        </div>";
+		
+		/*
         <div class='wrap page1-row2'>
         	<div class='page1-col-1 border-right'>
             	<h2>We know what it takes<strong class='clr-1'>to be the leader</strong></h2>
@@ -422,9 +426,21 @@ $dateEntiere = strftime("%A %d %B", mktime(0, 0, 0, date('m'), date('d'), date('
                 </ul>
             </div>     
         </div>
-    </section> 
 	*/
 	echo "
+	<div class='slogan'>
+        	<p><span class='clr-1'>Ca</span>sting</p>
+            <p></br>Depuis l’annonce dramatique du terrible accident de Paul Walker les plus folles rumeurs ont couru sur l’avenir de la saga Fast and Furious 7. 
+			Entre la possibilité de voir le frère de l’acteur reprendre le rôle à l’écran, celle de voir son personnage tout simplement disparaître alors qu’il avait participé à 75% du tournage, 
+			tout était annoncé puis démenti. Finalement cette rumeur quelque peu nauséabonde, notamment pour la famille devrait prendre fin dans les prochains jours. Si nous sommes loin du scandale 
+			de la vente sur le web des derniers objets de Paul Walker au moment de l’accident, le feuilleton sur sa présence dans FF7 a un peu trop duré.</br></br></p>
+		
+			
+        </div>
+    </section>
+";
+}
+echo "	
 </div>       
 </div> 
 <!--==============================aside=================================-->
